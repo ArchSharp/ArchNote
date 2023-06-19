@@ -1,0 +1,109 @@
+@rtk = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InJhcGhhZWwudHVuamlAeWFob28uY29tIiwiVXNlcklkIjoiNWUzYzlhNjUtNTU0Yi00NDI0LTgyNzktNGI0ZjgxN2I0ZmEzIiwiaWF0IjoxNjg3MTc2NjczfQ.7t0ouwbCd60pvimi-JdliK5H6t28lV5Az3hgjFreB8A"
+##@rtk1 = {{rtk}}
+@atk = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InJhcGhhZWwudHVuamlAeWFob28uY29tIiwiVXNlcklkIjoiNWUzYzlhNjUtNTU0Yi00NDI0LTgyNzktNGI0ZjgxN2I0ZmEzIiwiaWF0IjoxNjg3MTgxOTM5LCJleHAiOjE2ODcxODU1Mzl9.y7GWnU1wJVkBWsEeIkk6jOqVQHJyvPLZcd4JJRwWW5M
+###@atk1 = {{atk}}
+
+###
+
+POST http://localhost:5000/school/sendverifyemail/archraphr@gmail.com
+Authorization: Bearer {{atk}}
+
+###
+
+POST http://localhost:5000/school/signin
+Content-Type: application/json
+
+{ "Email":"raphael.tunji@yahoo.com", "Password":"Alade1&&&" }
+
+###
+POST http://localhost:5000/staff/add
+Authorization: Bearer {{atk}}
+Content-Type: application/json
+
+{
+  "SchoolId": "5e3c9a65-554b-4424-8279-4b4f817b4fa3",
+  "FirstName": "Alade",
+  "LastName": "Olaiyapo",
+  "Email": "archraphr@gmail.com",
+  "SchoolEmail": "email",
+  "Password": "pass",
+  "PhoneNumber": 2348102242355,
+  "Street": "Newtown estate",
+  "City": "Mowe",
+  "State": "Ogun",
+  "Country": "Nigeria",
+  "Subjects": ["Mathematics, Physics"],
+  "Rank": "Asst H.M",
+  "Role": "admin"
+}
+
+###
+
+POST http://localhost:5000/staff/signin
+Content-Type: application/json
+
+{ "Email":"Ola807866@ANote.com", "Password":"Lea4RUZDH4" }
+
+###
+
+POST http://localhost:5000/note/add
+
+###
+
+POST http://localhost:5000/school/newtoken
+Content-Type: application/json
+
+{
+    "RefreshToken": {{rtk}}
+}
+
+###
+
+DELETE http://localhost:5000/school/logout
+Content-Type: application/json
+
+{
+    "RefreshToken": {{rtk}}
+}
+
+###
+
+GET http://localhost:5000/anote/getallschools
+Authorization: Bearer {{atk}}
+
+
+###
+
+POST http://localhost:5000/transaction/makepayment
+Authorization: Bearer 
+
+###
+
+GET http://localhost:5000/transaction/verifypayment/934ldvmskl
+Authorization: Bearer {{atk}}
+
+
+###
+
+POST http://localhost:5000/transaction/makepayment
+Authorization: Bearer {{atk}}
+Content-Type: application/json
+
+{
+    "Email":"raphael.tunji@yahoo.com",
+    "Amount":"1750"
+}
+
+###
+
+//GET http://localhost:5000/archnote/createDbTable
+
+###
+
+POST https://api.appruve.co/v1/verifications/ng/business_info
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5hcHBydXZlLmNvIiwianRpIjoiNzQwMzM5NGEtMmMwYS00MDQ2LWFhZTgtODdmODRlODc0ODlkIiwiYXVkIjoiNTc2NDY3MDYtNzlkOC00Y2U4LWFhMjgtYTgxZjU2OGExMTFkIiwic3ViIjoiZWZlNzdhOTctMzNlMC00ZjM0LWEzNDQtOWIxOWRkMjBmYzNmIiwibmJmIjowLCJzY29wZXMiOlsidmVyaWZpY2F0aW9uX2RvY3VtZW50IiwidmVyaWZpY2F0aW9uX3ZpZXciXSwiZXhwIjoxNjg5Mzg1MzI0LCJpYXQiOjE2ODY3OTMzMjR9.fkME_Ke7kJgtX_fSokhux6vuGXcx9CgTPArOV2-GZbU
+Content-Type: application/json
+
+{
+    "search_term": "6925900"
+}
