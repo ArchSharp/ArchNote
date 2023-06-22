@@ -32,6 +32,7 @@ import { verify } from "jsonwebtoken";
 import { generateSixDigitNumber } from "../Utilities/RandomNumber";
 import { SendEmailMessage } from "../Services/Implementations/NodeMailer";
 import { SendPhoneMessage } from "../Services/Implementations/Twilio";
+import { InternalVerifyCompany } from "./HttpClientController";
 
 const schTab = "SchoolOwner";
 const dbId = "CacRegNumber";
@@ -46,11 +47,17 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
       const error = Message(400, SchoolIsExist);
       res.status(400).json(error);
     } else {
-      const hash = await bcrypt.hash(newSchool.Password, 10);
-      newSchool.Password = hash;
-      var response: ISchoolOwner = await AddToDB(schTab, newSchool);
-      const success = Message(200, CreateSuccess, response);
-      res.status(200).json(success);
+      const cacresponse = await InternalVerifyCompany(id);
+      if (cacresponse == null) {
+        var errVerify = `This School with ${id} is not registered with CAC`;
+        res.status(401).json(errVerify);
+      } else {
+        const hash = await bcrypt.hash(newSchool.Password, 10);
+        newSchool.Password = hash;
+        var response: ISchoolOwner = await AddToDB(schTab, newSchool);
+        const success = Message(200, CreateSuccess, response);
+        res.status(200).json(success);
+      }
     }
   } catch (error) {
     const err = Message(500, InternalError);

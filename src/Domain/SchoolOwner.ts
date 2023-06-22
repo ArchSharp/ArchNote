@@ -3,7 +3,7 @@ export interface ISchoolOwner {
   CeoName: string;
   Email: string;
   IsVerifiedEmail: boolean;
-  PhoneNumber: boolean;
+  PhoneNumber: number;
   IsVerifiedPhone: boolean;
   Password: string;
   SchoolName: string;

@@ -151,7 +151,7 @@ export const getallstaffs = async (req: Request, res: Response) => {
 export const signin = async (req: Request, res: Response) => {
   try {
     const { Email, Password } = req.body;
-    const email = "schoolemail";
+    const email = "SchoolEmail";
     var isUserExist = await FirstOrDefault(staffTable, email, Email);
     if (isUserExist == null) {
       res.status(404).json(Message(404, userNotFound));

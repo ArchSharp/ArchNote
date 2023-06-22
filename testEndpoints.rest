@@ -1,6 +1,6 @@
-@rtk = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InJhcGhhZWwudHVuamlAeWFob28uY29tIiwiVXNlcklkIjoiNWUzYzlhNjUtNTU0Yi00NDI0LTgyNzktNGI0ZjgxN2I0ZmEzIiwiaWF0IjoxNjg3MTc2NjczfQ.7t0ouwbCd60pvimi-JdliK5H6t28lV5Az3hgjFreB8A"
+@rtk = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InJhcGhhZWwudHVuamlAeWFob28uY29tIiwiVXNlcklkIjoiNWUzYzlhNjUtNTU0Yi00NDI0LTgyNzktNGI0ZjgxN2I0ZmEzIiwiaWF0IjoxNjg3MzEwOTY0fQ.c2g8pRY89IyxGynvmjD3O5-KSx1Q9_Seq5RdgVtkVcs"
 ##@rtk1 = {{rtk}}
-@atk = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InJhcGhhZWwudHVuamlAeWFob28uY29tIiwiVXNlcklkIjoiNWUzYzlhNjUtNTU0Yi00NDI0LTgyNzktNGI0ZjgxN2I0ZmEzIiwiaWF0IjoxNjg3MTgxOTM5LCJleHAiOjE2ODcxODU1Mzl9.y7GWnU1wJVkBWsEeIkk6jOqVQHJyvPLZcd4JJRwWW5M
+@atk = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InJhcGhhZWwudHVuamlAeWFob28uY29tIiwiVXNlcklkIjoiNWUzYzlhNjUtNTU0Yi00NDI0LTgyNzktNGI0ZjgxN2I0ZmEzIiwiaWF0IjoxNjg3MzEwOTY0LCJleHAiOjE2ODczMTQ1NjR9.mcZg8atxQs6Bf-W7OxSx-xnX1udPfyT4Nz4irzpNTvc
 ###@atk1 = {{atk}}
 
 ###
@@ -9,7 +9,32 @@ POST http://localhost:5000/school/sendverifyemail/archraphr@gmail.com
 Authorization: Bearer {{atk}}
 
 ###
+POST http://localhost:5000/school/signup
+Content-Type: application/json
 
+{
+  "CeoName": "Raphael Olaiyapo",
+  "Email": "archraphr@gmail.com",
+  "IsVerifiedEmail": false,
+  "PhoneNumber": 2348102242355,
+  "IsVerifiedPhone": false,
+  "Password": "Alade1&&&",
+  "SchoolName": "Arch School",
+  "Logo": "http",
+  "Street": "Newtown estate",
+  "City": "Mowe",
+  "State": "Ogun",
+  "Country": "Nigeria",
+  "CacRegNumber": "6925900",
+  "EstablishedDate": "1990-02-16",
+  "NumberOfTeachers": 20,
+  "SchoolType": ["Primary", "Secondary"],
+  "Motto": "In God We Trust",
+  "Rank": "CEO",
+  "Role": "superadmin"
+}
+
+###
 POST http://localhost:5000/school/signin
 Content-Type: application/json
 
@@ -43,6 +68,11 @@ POST http://localhost:5000/staff/signin
 Content-Type: application/json
 
 { "Email":"Ola807866@ANote.com", "Password":"Lea4RUZDH4" }
+
+###
+
+GET http://localhost:5000/staff/allstaffs/5e3c9a65-554b-4424-8279-4b4f817b4fa3
+Authorization: Bearer {{atk}}
 
 ###
 
@@ -107,3 +137,12 @@ Content-Type: application/json
 {
     "search_term": "6925900"
 }
+
+
+###
+
+GET http://localhost:5000/httpclient/country/universities/Nigeria
+
+###
+
+POST http://localhost:5000/httpclient/cacverify/6925900

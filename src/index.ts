@@ -8,6 +8,7 @@ import anoteRoute from "./Routes/ANoteRoute";
 import schoolRoute from "./Routes/SchoolRoute";
 import staffRoute from "./Routes/StaffRoute";
 import paymentRoute from "./Routes/PaymentRoute";
+import httpRoute from "./Routes/HttpClientRoute";
 import Producer from "./Services/Implementations/MessageBroker/Producer";
 import Consumer from "./Services/Implementations/MessageBroker/Consumer";
 
@@ -24,6 +25,7 @@ app.use("/anote", anoteRoute);
 app.use("/school", schoolRoute);
 app.use("/staff", staffRoute);
 app.use("/payment", paymentRoute);
+app.use("/httpclient", httpRoute);
 
 const server = http.createServer(app);
 
