@@ -21,16 +21,14 @@ class MailerConfig {
     this.testAccount = await nodemailer.createTestAccount();
   }
 
+  // Use createTransport with appropriate configuration
   get gmailParam(): any {
     return {
-      // Use createTransport with appropriate configuration
-      transporter: nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: gmailEmail,
-          pass: gmailPassword,
-        },
-      }),
+      service: "gmail",
+      auth: {
+        user: gmailEmail,
+        pass: gmailPassword,
+      },
     };
   }
 

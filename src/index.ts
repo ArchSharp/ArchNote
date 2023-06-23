@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import http from "http";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
@@ -27,11 +27,16 @@ app.use("/staff", staffRoute);
 app.use("/payment", paymentRoute);
 app.use("/httpclient", httpRoute);
 
+app.use("/", (req: Request, res: Response) => {
+  res.send("Working fine");
+});
+
 const server = http.createServer(app);
 
+//const ip = "http://localhost";
+const ip = "192.168.137.1";
 const port = 5000;
-const url = `http://localhost:${port}/`;
 
-server.listen(port, () => {
-  console.log(`Server running on ${url}`);
+server.listen(port, ip, () => {
+  console.log(`Server running on http://${ip}:${port}`);
 });

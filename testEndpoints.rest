@@ -1,15 +1,18 @@
-@rtk = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InJhcGhhZWwudHVuamlAeWFob28uY29tIiwiVXNlcklkIjoiNWUzYzlhNjUtNTU0Yi00NDI0LTgyNzktNGI0ZjgxN2I0ZmEzIiwiaWF0IjoxNjg3MzEwOTY0fQ.c2g8pRY89IyxGynvmjD3O5-KSx1Q9_Seq5RdgVtkVcs"
+@rtk = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6ImFyY2hyYXBockBnbWFpbC5jb20iLCJVc2VySWQiOiIzNmIxOGRiMS0wMGEwLTQyNWUtODI1NC04OTE2MzhkZGU3MTgiLCJpYXQiOjE2ODc0NzkxMzd9.pBCLVGFfx1d6R__LBtOndrX6H9ExclypzrVDD1URwRY"
 ##@rtk1 = {{rtk}}
-@atk = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InJhcGhhZWwudHVuamlAeWFob28uY29tIiwiVXNlcklkIjoiNWUzYzlhNjUtNTU0Yi00NDI0LTgyNzktNGI0ZjgxN2I0ZmEzIiwiaWF0IjoxNjg3MzEwOTY0LCJleHAiOjE2ODczMTQ1NjR9.mcZg8atxQs6Bf-W7OxSx-xnX1udPfyT4Nz4irzpNTvc
+@atk = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6ImFyY2hyYXBockBnbWFpbC5jb20iLCJVc2VySWQiOiIzNmIxOGRiMS0wMGEwLTQyNWUtODI1NC04OTE2MzhkZGU3MTgiLCJpYXQiOjE2ODc0NzkxMzcsImV4cCI6MTY4NzQ4MjczN30.sgxSM8_50mgHmURuVsieVCzTYijYudUMTI1PopjsHGI
 ###@atk1 = {{atk}}
+@url = http://192.168.137.1:5000
+//@url = http://localhost:5000
 
 ###
 
-POST http://localhost:5000/school/sendverifyemail/archraphr@gmail.com
+POST http://192.168.137.1:5000/school/sendverifyemail/archraphr@gmail.com
 Authorization: Bearer {{atk}}
 
 ###
-POST http://localhost:5000/school/signup
+
+POST {{url}}/school/signup
 Content-Type: application/json
 
 {
@@ -35,13 +38,15 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:5000/school/signin
+
+POST {{url}}/school/signin
 Content-Type: application/json
 
-{ "Email":"raphael.tunji@yahoo.com", "Password":"Alade1&&&" }
+{ "Email":"archraphr@gmail.com", "Password":"Alade1&&&" }
 
 ###
-POST http://localhost:5000/staff/add
+
+POST {{url}}/staff/add
 Authorization: Bearer {{atk}}
 Content-Type: application/json
 
@@ -64,23 +69,23 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:5000/staff/signin
+POST {{url}}/staff/signin
 Content-Type: application/json
 
 { "Email":"Ola807866@ANote.com", "Password":"Lea4RUZDH4" }
 
 ###
 
-GET http://localhost:5000/staff/allstaffs/5e3c9a65-554b-4424-8279-4b4f817b4fa3
+GET {{url}}/staff/allstaffs/5e3c9a65-554b-4424-8279-4b4f817b4fa3
 Authorization: Bearer {{atk}}
 
 ###
 
-POST http://localhost:5000/note/add
+POST {{url}}/note/add
 
 ###
 
-POST http://localhost:5000/school/newtoken
+POST {{url}}/school/newtoken
 Content-Type: application/json
 
 {
@@ -89,7 +94,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:5000/school/logout
+DELETE {{url}}/school/logout
 Content-Type: application/json
 
 {
@@ -98,24 +103,24 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:5000/anote/getallschools
+GET {{url}}/anote/getallschools
 Authorization: Bearer {{atk}}
 
 
 ###
 
-POST http://localhost:5000/transaction/makepayment
+POST {{url}}/transaction/makepayment
 Authorization: Bearer 
 
 ###
 
-GET http://localhost:5000/transaction/verifypayment/934ldvmskl
+GET {{url}}/transaction/verifypayment/934ldvmskl
 Authorization: Bearer {{atk}}
 
 
 ###
 
-POST http://localhost:5000/transaction/makepayment
+POST {{url}}/transaction/makepayment
 Authorization: Bearer {{atk}}
 Content-Type: application/json
 
@@ -126,23 +131,12 @@ Content-Type: application/json
 
 ###
 
-//GET http://localhost:5000/archnote/createDbTable
+//GET {{url}}/archnote/createDbTable
 
 ###
 
-POST https://api.appruve.co/v1/verifications/ng/business_info
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5hcHBydXZlLmNvIiwianRpIjoiNzQwMzM5NGEtMmMwYS00MDQ2LWFhZTgtODdmODRlODc0ODlkIiwiYXVkIjoiNTc2NDY3MDYtNzlkOC00Y2U4LWFhMjgtYTgxZjU2OGExMTFkIiwic3ViIjoiZWZlNzdhOTctMzNlMC00ZjM0LWEzNDQtOWIxOWRkMjBmYzNmIiwibmJmIjowLCJzY29wZXMiOlsidmVyaWZpY2F0aW9uX2RvY3VtZW50IiwidmVyaWZpY2F0aW9uX3ZpZXciXSwiZXhwIjoxNjg5Mzg1MzI0LCJpYXQiOjE2ODY3OTMzMjR9.fkME_Ke7kJgtX_fSokhux6vuGXcx9CgTPArOV2-GZbU
-Content-Type: application/json
-
-{
-    "search_term": "6925900"
-}
-
+GET {{url}}/httpclient/country/universities/Nigeria
 
 ###
 
-GET http://localhost:5000/httpclient/country/universities/Nigeria
-
-###
-
-POST http://localhost:5000/httpclient/cacverify/6925900
+POST {{url}}/httpclient/cacverify/6925900

@@ -13,6 +13,7 @@ export const SendEmailMessage = async (
   // param = await mailerConfig.getEtherealTestParam();
   param = mailerConfig.gmailParam;
   // param = mailerConfig.mainParam;
+
   let transporter = nodemailer.createTransport(param);
 
   let mailOptions = {
