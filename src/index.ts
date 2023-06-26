@@ -33,10 +33,10 @@ app.use("/", (req: Request, res: Response) => {
 
 const server = http.createServer(app);
 
-//const ip = "http://localhost";
-const ip = "192.168.137.1";
+// const ip = "127.0.0.1";
+const ip = "192.168.193.174";
 const port = 5000;
 
 server.listen(port, ip, () => {
-  console.log(`Server running on http://${ip}:${port}`);
+  console.log(`Server running on http://${ip}:${port}/`);
 });
