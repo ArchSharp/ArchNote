@@ -11,6 +11,10 @@ import paymentRoute from "./Routes/PaymentRoute";
 import httpRoute from "./Routes/HttpClientRoute";
 import Producer from "./Services/Implementations/MessageBroker/Producer";
 import Consumer from "./Services/Implementations/MessageBroker/Consumer";
+import { convertToPdf } from "./Services/Implementations/WordPdfConvertService";
+import * as path from "path";
+import { PDFNet } from "@pdftron/pdfnet-node";
+import * as fs from "fs";
 
 // const producer = new Producer();
 // const consumer = new Consumer();
@@ -27,14 +31,46 @@ app.use("/staff", staffRoute);
 app.use("/payment", paymentRoute);
 app.use("/httpclient", httpRoute);
 
-app.use("/", (req: Request, res: Response) => {
-  res.send("Working fine");
+app.use("/generateinvoice", (req: Request, res: Response) => {});
+
+app.use("/convertfromoffice", async (req: Request, res: Response) => {
+  const { filename } = req.query;
+
+  const inputPath = path.resolve(__dirname, `./Files/${filename}.docx`);
+  const outputPath = path.resolve(__dirname, `./Files/${filename}.pdf`);
+
+  const convertToPdf = async () => {
+    const pdfdoc = await PDFNet.PDFDoc.create();
+    await pdfdoc.initSecurityHandler();
+    await PDFNet.Convert.toPdf(pdfdoc, inputPath);
+    pdfdoc.save(outputPath, PDFNet.SDFDoc.SaveOptions.e_linearized);
+  };
+
+  await PDFNet.runWithCleanup(
+    convertToPdf,
+    "demo:1687870598757:7d91b63b03000000009ef8ab7bef0993b032e25c1e23d8c1baf5355978"
+  )
+    .then(() => {
+      fs.readFile(outputPath, (err, data) => {
+        if (err) {
+          res.status(500).end(err);
+        } else {
+          res.setHeader("ContentType", "application/pdf");
+          res.sendFile(outputPath);
+          //  .send(data);
+        }
+      });
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.end(err);
+    });
 });
 
 const server = http.createServer(app);
 
-// const ip = "127.0.0.1";
-const ip = "192.168.193.174";
+const ip = "127.0.0.1";
+// const ip = "192.168.193.174";
 const port = 5000;
 
 server.listen(port, ip, () => {

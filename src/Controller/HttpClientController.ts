@@ -28,7 +28,10 @@ export const UniversitiesByCountry = async (req: Request, res: Response) => {
 };
 
 // Make a POST request with data
-export const VerifyCompany = async (req: Request, res: Response) => {
+export const VerifyCompany = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
   const url =
     "https://postapp.cac.gov.ng/postapp/api/front-office/search/company-business-name-it";
   const { param } = req.params;
@@ -40,6 +43,7 @@ export const VerifyCompany = async (req: Request, res: Response) => {
     res.status(200).json(response);
   } catch (error) {
     console.error(error);
+    return null;
   }
 };
 
