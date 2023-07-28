@@ -52,9 +52,8 @@ export const verifypaystack_payment = async (req: Request, res: Response) => {
 };
 
 export const flutterwave_chargecard = async (req: Request, res: Response) => {
-  const payload: IFlutterwavePayment = req.body;
-
   try {
+    const payload: IFlutterwavePayment = req.body;
     const paymentResponse = await InitiatePayment(payload);
 
     const message = Message(

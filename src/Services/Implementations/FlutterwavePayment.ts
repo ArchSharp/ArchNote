@@ -1,4 +1,5 @@
 import axios from "axios";
+import forge from "node-forge";
 import { flutterwaveEKey, flutterwaveSKey } from "../../Utilities/Configs";
 import { IFlutterwavePayment } from "../../Domain/FlutterwaveCardPayload";
 
@@ -20,20 +21,19 @@ export const InitiatePayment = async (payload: IFlutterwavePayment) => {
     const response = await axiosInstance.post(CHARGES_ENDPOINT, encryptPayload);
     return response.data;
   } catch (error) {
-    console.error("Error initiating payment:", error.response.data);
-    // throw error;
+    console.error("Error initiating payment:", error);
+    throw error;
   }
 };
 
-function encrypt(encryptionKey: string, payload: IFlutterwavePayment) {
+function encrypt(encryptionKey: string, payload: IFlutterwavePayment): string {
   const text = JSON.stringify(payload);
-  const forge = require("node-forge");
   const cipher = forge.cipher.createCipher(
     "3DES-ECB",
     forge.util.createBuffer(encryptionKey)
   );
   cipher.start({ iv: "" });
-  cipher.update(forge.util.createBuffer(text, "utf-8"));
+  cipher.update(forge.util.createBuffer(text, "utf8"));
   cipher.finish();
   const encrypted = cipher.output;
   return forge.util.encode64(encrypted.getBytes());
