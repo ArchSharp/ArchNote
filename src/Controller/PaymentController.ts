@@ -5,8 +5,10 @@ import {
   paystackverifypayment,
 } from "../Services/Implementations/PayStackPayment";
 import { Message } from "../Response/IResponse";
+import { IFlutterwavePayment } from "../Domain/FlutterwaveCardPayload";
+import { InitiatePayment } from "../Services/Implementations/FlutterwavePayment";
 
-export const makepayment = (req: Request, res: Response) => {
+export const makepaystack_payment = (req: Request, res: Response) => {
   try {
     const payload: IPayment = req.body;
     // const response = paystackverifypayment(reference);
@@ -28,7 +30,7 @@ export const makepayment = (req: Request, res: Response) => {
   }
 };
 
-export const verifypayment = async (req: Request, res: Response) => {
+export const verifypaystack_payment = async (req: Request, res: Response) => {
   try {
     const { reference } = req.params;
     // const response = paystackverifypayment(reference);
@@ -46,5 +48,24 @@ export const verifypayment = async (req: Request, res: Response) => {
       });
   } catch (error) {
     return res.status(404).json("Transaction not retrieved");
+  }
+};
+
+export const flutterwave_chargecard = async (req: Request, res: Response) => {
+  const payload: IFlutterwavePayment = req.body;
+
+  try {
+    const paymentResponse = await InitiatePayment(payload);
+
+    const message = Message(
+      200,
+      "Flutterwave payment initiated successfully",
+      paymentResponse
+    );
+    return res.status(200).json(message);
+  } catch (error) {
+    console.error("Error:", error.message);
+
+    return res.status(404).json("Flutterwave payment initiation failed");
   }
 };

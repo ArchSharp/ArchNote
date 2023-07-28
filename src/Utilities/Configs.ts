@@ -23,6 +23,9 @@ export const TwilioAcctSid = process.env.TWILIO_ACCOUNT_SID;
 export const TwilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
 export const TwilioFrom = process.env.TWILIO_FROM;
 export const paystacksecret = process.env.PAYSTACK_SECRET_KEY;
+export const flutterwavePKey = process.env.FLUTTERWAVE_PUBLIC_KEY;
+export const flutterwaveSKey = process.env.FLUTTERWAVE_SECRET_KEY;
+export const flutterwaveEKey = process.env.FLUTTERWAVE_ENCRYPT_KEY;
 
 //RabbitMQ
 export const AppId = process.env.APP_ID;

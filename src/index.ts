@@ -27,10 +27,11 @@ if (cluster.isPrimary) {
   for (let i = 0; i < numCPUs; i++) {
     cluster.fork();
   }
-  console.log("Number of CPU(s): ", numCPUs);
+  // console.log("Number of CPU(s): ", numCPUs);
 
   cluster.on("exit", (worker, code, signal) => {
     console.log(`Worker ${worker.process.pid} died`);
+    cluster.fork();
   });
 } else {
   const app = express();
@@ -42,7 +43,7 @@ if (cluster.isPrimary) {
   app.use("/anote", anoteRoute);
   app.use("/school", schoolRoute);
   app.use("/staff", staffRoute);
-  app.use("/payment", paymentRoute);
+  app.use("/transaction", paymentRoute);
   app.use("/httpclient", httpRoute);
 
   app.use("/generateinvoice", (req: Request, res: Response) => {});
@@ -83,14 +84,11 @@ if (cluster.isPrimary) {
 
   const server = http.createServer(app);
 
-  // const ip = "127.0.0.1";
+  const ip = "127.0.0.1";
   // const ip = "192.168.137.1";
-  const port = 3000;
+  const port = 5000;
 
-  // server.listen(port, ip, () => {
-  //   console.log(`Server running on http://${ip}:${port}/`);
-  // });
-  server.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+  server.listen(port, ip, () => {
+    console.log(`Server running on http://${ip}:${port}/`);
   });
 }
