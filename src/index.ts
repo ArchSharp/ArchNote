@@ -84,9 +84,9 @@ if (cluster.isPrimary) {
 
   const server = http.createServer(app);
 
-  const ip = "127.0.0.1";
-  // const ip = "192.168.137.1";
-  const port = 5000;
+  // const ip = "127.0.0.1";
+  const ip = "192.168.137.1";
+  const port = 8080;
 
   server.listen(port, ip, () => {
     console.log(`Server running on http://${ip}:${port}/`);

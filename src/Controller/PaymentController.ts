@@ -36,15 +36,12 @@ export const verifypaystack_payment = async (req: Request, res: Response) => {
     // const response = paystackverifypayment(reference);
     paystackverifypayment(reference)
       .then((response) => {
-        // console.log(response);
-        // Handle the response as needed
         return res
           .status(200)
           .json(Message(200, "Transaction retreived", response));
       })
       .catch((error) => {
         console.error(error);
-        // Handle the error appropriately
       });
   } catch (error) {
     return res.status(404).json("Transaction not retrieved");
@@ -54,17 +51,19 @@ export const verifypaystack_payment = async (req: Request, res: Response) => {
 export const flutterwave_chargecard = async (req: Request, res: Response) => {
   try {
     const payload: IFlutterwavePayment = req.body;
-    const paymentResponse = await InitiatePayment(payload);
-
-    const message = Message(
-      200,
-      "Flutterwave payment initiated successfully",
-      paymentResponse
-    );
-    return res.status(200).json(message);
+    InitiatePayment(payload)
+      .then((response) => {
+        const message = Message(
+          200,
+          "Flutterwave payment initiated successfully",
+          response
+        );
+        return res.status(200).json(message);
+      })
+      .catch((error) => {
+        return res.status(404).json("Error initiating payment:" + error);
+      });
   } catch (error) {
-    console.error("Error:", error.message);
-
-    return res.status(404).json("Flutterwave payment initiation failed");
+    return res.status(404).json("Flutterwave payment error: " + error.message);
   }
 };

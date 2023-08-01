@@ -14,16 +14,19 @@ const axiosInstance = axios.create({
   },
 });
 
-export const InitiatePayment = async (payload: IFlutterwavePayment) => {
-  try {
-    // Make a POST request to initiate the payment
+export const InitiatePayment = (payload: IFlutterwavePayment) => {
+  return new Promise((resolve, reject) => {
     const encryptPayload = encrypt(flutterwaveEKey, payload);
-    const response = await axiosInstance.post(CHARGES_ENDPOINT, encryptPayload);
-    return response.data;
-  } catch (error) {
-    console.error("Error initiating payment:", error);
-    throw error;
-  }
+    axiosInstance
+      .post(CHARGES_ENDPOINT, encryptPayload)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+        reject(error);
+      });
+  });
 };
 
 function encrypt(encryptionKey: string, payload: IFlutterwavePayment): string {
